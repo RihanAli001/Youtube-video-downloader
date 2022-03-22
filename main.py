@@ -69,6 +69,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.minimize_btn.clicked.connect(lambda: self.showMinimized())
         self.restore_btn.clicked.connect(lambda: self.restore_or_maximize_window())
 
+        self.short_msg_notification("Ready to go...")
+
     """
     Showing short process message to user
     """
@@ -111,6 +113,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             s = Search(query)
         except Exception as e:
             print("Query search error...\n", e)
+            self.short_msg_notification("Something went wrong...")
             return
         print("Query Search:", query)
         self.yt = s.results[0]
@@ -147,6 +150,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         print(url)
         self.yt = YouTube(url, on_progress_callback=self.download_callback)
         self.update_video_qualities()
+        # threading.Thread(target=self.update_video_qualities, args=()).start()
         self.video_info_update()
 
     """
@@ -154,7 +158,18 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     """
 
     def update_video_qualities(self):
-        ...
+        self.download_video_quality.clear()
+        print("Option box is cleared...")
+        stream = self.yt.streams.filter(progressive=True)
+        if not len(stream):
+            print(len(stream))
+            self.download_video_quality.addItems("--no quality--")
+            print("No quality found...")
+            return
+        print(stream)
+        for i in stream:
+            self.download_video_quality.addItem(i.resolution)
+            print("Quality :", i.resolution)
 
     def download_callback(self, stream, chunk, bytes_remaining):
         file_size = stream.filesize
@@ -173,7 +188,10 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         threading.Thread(target=self.download, args=()).start()
 
     def download(self):
-        self.yt.streams.filter(progressive=True).desc().first().download()
+        quality = self.download_video_quality.currentText()
+        print(quality)
+        self.yt.streams.filter(progressive=True, res=quality).first().download()
+        self.short_msg_notification("Download done...")
 
     """"
     Youtube video information update in video information section

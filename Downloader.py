@@ -796,6 +796,6 @@ class Ui_MainWindow(object):
         self.video_author_label.setText(_translate("MainWindow", "Author :"))
         self.video_author_field.setText(_translate("MainWindow", "RihanHack"))
         self.creator_label.setText(_translate("MainWindow", "Creator: Parvej Ali"))
-        self.short_msg_label.setText(_translate("MainWindow", "Success..."))
+        self.short_msg_label.setText(_translate("MainWindow", "Please wait, software is loading..."))
         self.version_label.setText(_translate("MainWindow", "v1.0.0"))
 import resource_rc
