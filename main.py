@@ -89,8 +89,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.set_main_home_page()
         try:
             self.yt = YouTube(url, on_progress_callback=self.download_callback)
-        except:
-            print("URL is not valid...")
+        except Exception as e:
+            print("URL is not valid...\n", e)
             self.short_msg_notification("URL is not valid...")
             self.query_video_search()
             return
@@ -109,8 +109,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.set_main_home_page()
         try:
             s = Search(query)
-        except:
-            print("Query search error...")
+        except Exception as e:
+            print("Query search error...\n", e)
             return
         print("Query Search:", query)
         self.yt = s.results[0]
@@ -124,8 +124,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         try:
             urllib.request.urlopen("http://youtube.com")
             return True
-        except:
-            print("Internet is not connected")
+        except Exception as e:
+            print("Internet is not connected\n", e)
             self.short_msg_notification("Internet is not connected...")
             return False
 
@@ -159,6 +159,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def download_callback(self, stream, chunk, bytes_remaining):
         file_size = stream.filesize
         bytes_downloaded = file_size - bytes_remaining
+        print(chunk)
         self.short_msg_notification(f"{bytes_downloaded}/{file_size} Downloading...")
         if bytes_downloaded == file_size:
             self.short_msg_notification(f"{bytes_downloaded}/{file_size} Downloaded")
@@ -173,7 +174,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
     def download(self):
         self.yt.streams.filter(progressive=True).desc().first().download()
-
 
     """"
     Youtube video information update in video information section
