@@ -362,7 +362,9 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     """
 
     def update_volume_up(self):
-        self.media_player.audio_set_volume(self.media_player.audio_get_volume() + 10)
+        volume = self.media_player.audio_get_volume()
+        if volume < 200:
+            self.media_player.audio_set_volume(volume + 10)
         print(self.media_player.audio_get_volume())
 
     """
