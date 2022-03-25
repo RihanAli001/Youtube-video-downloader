@@ -321,7 +321,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
         self.media.parse()
         self.setWindowTitle("YouTube Video Downloader - " + self.media.get_meta(0))
-        self.top_bar_label.setText(self.media.get_meta(0) + " - YouTube Video Downloader")
 
         if sys.platform.startswith('linux'):  # for Linux using the X Server
             self.media_player.set_xwindow(self.video_player_frame.winId())
