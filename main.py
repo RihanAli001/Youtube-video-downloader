@@ -10,8 +10,6 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QFileSystemM
 from pytube import YouTube, Search
 import vlc
 
-WINDOW_SIZE = 0
-
 
 class MyMainWindow(QMainWindow, Ui_MainWindow):
     """
@@ -65,10 +63,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.home_btn.clicked.connect(self.set_main_home_page)
         self.local_btn.clicked.connect(self.set_main_local_page)
         self.info_drop_down_btn.clicked.connect(self.info_drop_down)
-
-        self.close_btn.clicked.connect(lambda: self.close())
-        self.minimize_btn.clicked.connect(lambda: self.showMinimized())
-        self.restore_btn.clicked.connect(lambda: self.restore_or_maximize_window())
 
         self.short_msg_notification("Ready to go...")
 
@@ -214,24 +208,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         if self.yt.author != "":
             self.video_author_field.setText(self.yt.author)
             print("Video author " + self.yt.author + "...")
-
-    """
-    Restore or maximizing the window
-    """
-
-    def restore_or_maximize_window(self):
-        global WINDOW_SIZE
-        win_status = WINDOW_SIZE
-        icon = QtGui.QIcon()
-        if win_status == 0:
-            WINDOW_SIZE = 1
-            self.showMaximized()
-            icon.addPixmap(QtGui.QPixmap(":/icons_white/icons_White/icon_restore.png"))
-        else:
-            WINDOW_SIZE = 0
-            self.showNormal()
-            icon.addPixmap(QtGui.QPixmap(":/icons_white/icons_White/icon_maximize.png"))
-        self.restore_btn.setIcon(icon)
 
     """
     Show/hide left navigation bar.
