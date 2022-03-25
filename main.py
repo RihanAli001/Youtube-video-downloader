@@ -141,10 +141,13 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         url = str(url).replace("PyQt5.QtCore.QUrl('", "")
         url = url.replace("')", "")
         print(url)
-        self.yt = YouTube(url, on_progress_callback=self.download_callback)
-        self.update_video_qualities()
-        # threading.Thread(target=self.update_video_qualities, args=()).start()
-        self.video_info_update()
+        try:
+            self.yt = YouTube(url, on_progress_callback=self.download_callback)
+            self.update_video_qualities()
+            # threading.Thread(target=self.update_video_qualities, args=()).start()
+            self.video_info_update()
+        except Exception as e:
+            print("Page error :", e)
 
     """
     Give video quality options to user for downloading video
