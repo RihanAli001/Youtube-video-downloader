@@ -49,6 +49,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.download_btn.clicked.connect(self.download_video)
         QShortcut('Ctrl+D', self).activated.connect(self.download_video)
         self.webview.urlChanged.connect(self.display_webview_url)
+        # self.webview.loadFinished.connect(self.webview_loading_finished)
         self.yt = None
 
         self.model = QFileSystemModel()
@@ -71,46 +72,9 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def short_msg_notification(self, msg):
         self.short_msg_label.setText(msg)
 
-    """
-    Searching youtube video using video Url.
-    """
-
-    def url_video_search(self):
-        if not self.is_internet():
-            return
-        url = self.search_bar.text()
-        if not len(url):
-            url = "https://youtu.be/Az-mGR-CehY"
-        self.set_main_home_page()
-        try:
-            self.yt = YouTube(url, on_progress_callback=self.download_callback)
-        except Exception as e:
-            print("URL is not valid...\n", e)
-            self.short_msg_notification("URL is not valid...")
-            self.query_video_search()
-            return
-        self.web_update_video()
-
-    """
-    Searching youtube video using search query.
-    """
-
-    def query_video_search(self):
-        if not self.is_internet():
-            return
-        query = self.search_bar.text()
-        if not len(query):
-            query = "Rihan Ali001"
-        self.set_main_home_page()
-        try:
-            s = Search(query)
-        except Exception as e:
-            print("Query search error...\n", e)
-            self.short_msg_notification("Something went wrong...")
-            return
-        print("Query Search:", query)
-        self.yt = s.results[0]
-        self.web_update_video()
+    def webview_loading_finished(self, is_finished):
+        if is_finished:
+            self.display_webview_url(self.webview.url())
 
     """
     Checking internet connection for playing youtube videos.
@@ -124,6 +88,42 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             print("Internet is not connected\n", e)
             self.short_msg_notification("Internet is not connected...")
             return False
+
+    """
+    Searching youtube video using video Url.
+    """
+
+    def url_video_search(self):
+        if not self.is_internet():
+            return
+        url = self.search_bar.text()
+        if not len(url):
+            url = "http://www.youtube.com"
+        self.set_main_home_page()
+        try:
+            print("Youtube is searching...")
+            # self.yt = YouTube(url, on_progress_callback=self.download_callback)
+        except Exception as e:
+            print("URL is not valid...\n", e)
+            self.short_msg_notification("URL is not valid...")
+            self.query_video_search()
+            return
+        self.webview.setUrl(QUrl(url))
+
+    """
+    Searching youtube video using search query.
+    """
+
+    def query_video_search(self):
+        if not self.is_internet():
+            return
+        query = self.search_bar.text()
+        if not len(query):
+            query = "Rihan Ali001"
+        query = query.replace(" ", "+")
+        self.set_main_home_page()
+        print("Query Search:", query)
+        self.webview.setUrl(QUrl(f'https://www.youtube.com/results?search_query={query}'))
 
     """
     Updating home page for new video Url.
@@ -147,7 +147,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             # threading.Thread(target=self.update_video_qualities, args=()).start()
             self.video_info_update()
         except Exception as e:
-            print("Page error :", e)
+            print("Url :", url, "\nPage error :", e)
 
     """
     Give video quality options to user for downloading video

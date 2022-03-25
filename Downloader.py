@@ -670,7 +670,7 @@ class Ui_MainWindow(object):
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#000000;\">Search For URL</span></p></body></html>"))
         self.url_btn.setText(_translate("MainWindow", "URL"))
-        self.download_video_quality.setItemText(0, _translate("MainWindow", "--Video Quality--"))
+        self.download_video_quality.setItemText(0, _translate("MainWindow", "--empty--"))
         self.home_btn.setToolTip(_translate("MainWindow", "Home/Online Videoes Menu"))
         self.local_btn.setToolTip(_translate("MainWindow", "Local Videoes Menu"))
         self.pushButton.setToolTip(_translate("MainWindow", "Settings"))
