@@ -19,7 +19,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MyMainWindow, self).__init__(parent)
         self.setupUi(self)
-        self.top_bar.hide()
 
         self.instance = vlc.Instance("prefer-insecure")
         self.media_player = self.instance.media_player_new()
@@ -42,7 +41,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
         self.webview = QWebEngineView(self.web_video_player_frame)
         self.verticalLayout_13.addWidget(self.webview)
-        self.webview.setUrl(QUrl('http://youtube.com/'))
         self.search_btn.clicked.connect(self.query_video_search)
         QShortcut('Ctrl+S', self).activated.connect(self.query_video_search)
         QShortcut('Ctrl+Shift+S', self).activated.connect(self.search_bar.setFocus)
