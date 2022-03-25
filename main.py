@@ -44,6 +44,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
         self.webview = QWebEngineView(self.web_video_player_frame)
         self.verticalLayout_13.addWidget(self.webview)
+        self.webview.setUrl(QUrl('http://youtube.com/'))
         self.search_btn.clicked.connect(self.query_video_search)
         QShortcut('Ctrl+S', self).activated.connect(self.query_video_search)
         QShortcut('Ctrl+Shift+S', self).activated.connect(self.search_bar.setFocus)
@@ -388,7 +389,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     """
 
     def update_volume_up(self):
-        self.media_player.audio_set_volume(self.media_player.audio_get_volume() + 1)
+        self.media_player.audio_set_volume(self.media_player.audio_get_volume() + 10)
         print(self.media_player.audio_get_volume())
 
     """
@@ -396,7 +397,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     """
 
     def update_volume_down(self):
-        self.media_player.audio_set_volume(self.media_player.audio_get_volume() - 1)
+        self.media_player.audio_set_volume(self.media_player.audio_get_volume() - 10)
         print(self.media_player.audio_get_volume())
 
     """
@@ -406,8 +407,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def set_position(self, position):
         try:
             self.media_player.set_position(position / 1000.0)
-        finally:
-            print("Position calculation error")
+        except Exception as e:
+            print("Position calculation error :", e)
 
     """
     Update media player Ui when it is playing.
@@ -416,8 +417,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def update_ui(self):
         try:
             self.video_position_slider.setValue(int(self.media_player.get_position() * 1000))
-        finally:
-            print("Slider position calculation error")
+        except Exception as e:
+            print("Slider position calculation error :", e)
 
         if not self.media_player.is_playing():
             self.timer.stop()
