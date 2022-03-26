@@ -97,7 +97,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.set_main_home_page()
         try:
             print("Youtube is searching...")
-            # self.yt = YouTube(url, on_progress_callback=self.download_callback)
         except Exception as e:
             print("URL is not valid...\n", e)
             self.short_msg_notification("URL is not valid...")
@@ -114,19 +113,11 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             return
         query = self.search_bar.text()
         if not len(query):
-            query = "Rihan Ali001"
+            query = "youtube.com"
         query = query.replace(" ", "+")
         self.set_main_home_page()
         print("Query Search:", query)
         self.webview.setUrl(QUrl(f'https://www.youtube.com/results?search_query={query}'))
-
-    """
-    Updating home page for new video Url.
-    """
-
-    def web_update_video(self):
-        self.webview.setUrl(QUrl(f'{self.yt.watch_url}?rel=0'))
-        print(f'{self.yt.watch_url}?rel=0')
 
     """
     Displaying youtube video url
@@ -138,8 +129,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         print(url)
         try:
             self.yt = YouTube(url, on_progress_callback=self.download_callback)
-            self.update_video_qualities()
-            # threading.Thread(target=self.update_video_qualities, args=()).start()
+            threading.Thread(target=self.update_video_qualities, args=()).start()
             self.video_info_update()
         except Exception as e:
             print("Url :", url, "\nPage error :", e)
@@ -151,16 +141,23 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def update_video_qualities(self):
         self.download_video_quality.clear()
         print("Option box is cleared...")
-        stream = self.yt.streams.filter(progressive=True)
+        stream = ""
+        try:
+            stream = self.yt.streams.filter(progressive=True)
+        except Exception as e:
+            print("Video Unavailable :", e)
         if not len(stream):
             print(len(stream))
-            self.download_video_quality.addItems("--no quality--")
+            self.download_video_quality.addItem("--empty--")
             print("No quality found...")
             return
         print(stream)
+        quality = []
         for i in stream:
-            self.download_video_quality.addItem(i.resolution)
-            print("Quality :", i.resolution)
+            if i.resolution is not None and i.resolution not in quality:
+                quality.append(i.resolution)
+                print("Quality :", i.resolution)
+        self.download_video_quality.addItems(quality)
 
     def download_callback(self, stream, chunk, bytes_remaining):
         file_size = stream.filesize
