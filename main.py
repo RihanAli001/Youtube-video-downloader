@@ -7,7 +7,7 @@ from PyQt5 import QtGui
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtCore import QTimer, QUrl
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QFileSystemModel, QShortcut
-from pytube import YouTube, Search
+from pytube import YouTube
 import vlc
 
 
@@ -49,7 +49,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.download_btn.clicked.connect(self.download_video)
         QShortcut('Ctrl+D', self).activated.connect(self.download_video)
         self.webview.urlChanged.connect(self.display_webview_url)
-        # self.webview.loadFinished.connect(self.webview_loading_finished)
         self.yt = None
 
         self.model = QFileSystemModel()
@@ -71,10 +70,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
     def short_msg_notification(self, msg):
         self.short_msg_label.setText(msg)
-
-    def webview_loading_finished(self, is_finished):
-        if is_finished:
-            self.display_webview_url(self.webview.url())
 
     """
     Checking internet connection for playing youtube videos.
@@ -261,20 +256,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.video_info_frame.setMaximumHeight(0)
             icon.addPixmap(QtGui.QPixmap(":/icons_white/icons_White/cil-arrow-top.png"))
         self.info_drop_down_btn.setIcon(icon)
-
-    """
-    Showing youtube video information.
-    """
-
-    def show_yt_video_information(self):
-        print(self.webview.title())
-
-    """
-    Showing media player video information.
-    """
-
-    def show_local_video_information(self):
-        print(self.media.get_meta(0))
 
     """
     Play/pause the media player if player has no media then open file
