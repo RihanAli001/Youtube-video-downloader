@@ -93,7 +93,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             return
         url = self.search_bar.text()
         if not len(url):
-            url = "http://www.youtube.com"
+            url = "https://www.youtube.com/"
         self.set_main_home_page()
         try:
             print("Youtube is searching...")
