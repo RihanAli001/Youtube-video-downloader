@@ -133,7 +133,7 @@ border: 2px solid rgb(0, 85, 255);
             </property>
             <property name="icon">
              <iconset resource="resource.qrc">
-              <normaloff>:/icons_white/icons_White/icon_menu.png</normaloff>:/icons_white/icons_White/icon_menu.png</iconset>
+              <normaloff>:/icons_White/icons_White/icon_menu.png</normaloff>:/icons_White/icons_White/icon_menu.png</iconset>
             </property>
            </widget>
           </item>
@@ -159,7 +159,7 @@ border: 2px solid rgb(0, 85, 255);
             </property>
             <property name="icon">
              <iconset resource="resource.qrc">
-              <normaloff>:/icons_white/icons_White/cil-arrow-left.png</normaloff>:/icons_white/icons_White/cil-arrow-left.png</iconset>
+              <normaloff>:/icons_White/icons_White/cil-arrow-left.png</normaloff>:/icons_White/icons_White/cil-arrow-left.png</iconset>
             </property>
            </widget>
           </item>
@@ -185,7 +185,7 @@ border: 2px solid rgb(0, 85, 255);
             </property>
             <property name="icon">
              <iconset resource="resource.qrc">
-              <normaloff>:/icons_white/icons_White/cil-arrow-right.png</normaloff>:/icons_white/icons_White/cil-arrow-right.png</iconset>
+              <normaloff>:/icons_White/icons_White/cil-arrow-right.png</normaloff>:/icons_White/icons_White/cil-arrow-right.png</iconset>
             </property>
            </widget>
           </item>
@@ -242,7 +242,7 @@ background-color: rgb(0, 85, 255);
              <string>Search</string>
             </property>
             <property name="icon">
-             <iconset resource="resource.qrc">
+             <iconset>
               <normaloff>:/icons_white/icons_White/cil-magnifying-glass.png</normaloff>:/icons_white/icons_White/cil-magnifying-glass.png</iconset>
             </property>
            </widget>
@@ -318,7 +318,7 @@ border:0px;</string>
             </property>
             <property name="icon">
              <iconset resource="resource.qrc">
-              <normaloff>:/icons_white/icons_White/cil-data-transfer-down.png</normaloff>:/icons_white/icons_White/cil-data-transfer-down.png</iconset>
+              <normaloff>:/icons_White/icons_White/cil-data-transfer-down.png</normaloff>:/icons_White/icons_White/cil-data-transfer-down.png</iconset>
             </property>
            </widget>
           </item>
@@ -446,7 +446,7 @@ background-color: rgb(0, 85, 255);
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="resource.qrc">
+                   <iconset>
                     <normaloff>:/icons_white/icons_White/cil-home.png</normaloff>:/icons_white/icons_White/cil-home.png</iconset>
                   </property>
                  </widget>
@@ -469,7 +469,7 @@ background-color: rgb(0, 85, 255);
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="resource.qrc">
+                   <iconset>
                     <normaloff>:/icons_white/icons_White/cil-library.png</normaloff>:/icons_white/icons_White/cil-library.png</iconset>
                   </property>
                  </widget>
@@ -553,7 +553,7 @@ background-color: rgb(0, 85, 255);
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="resource.qrc">
+                   <iconset>
                     <normaloff>:/icons_white/icons_White/cil-settings.png</normaloff>:/icons_white/icons_White/cil-settings.png</iconset>
                   </property>
                  </widget>
@@ -748,7 +748,7 @@ border: 2px solid rgb(0, 85, 255);
                        <string>Open Folder</string>
                       </property>
                       <property name="icon">
-                       <iconset resource="resource.qrc">
+                       <iconset>
                         <normaloff>:/icons_white/icons_White/cil-folder-open.png</normaloff>:/icons_white/icons_White/cil-folder-open.png</iconset>
                       </property>
                      </widget>
@@ -1018,7 +1018,7 @@ border: 2px solid rgb(0, 85, 255);
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="resource.qrc">
+                       <iconset>
                         <normaloff>:/icons_white/icons_White/cil-arrow-top.png</normaloff>:/icons_white/icons_White/cil-arrow-top.png</iconset>
                       </property>
                      </widget>

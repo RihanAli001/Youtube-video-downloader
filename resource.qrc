@@ -1,7 +1,5 @@
 <RCC>
-  <qresource prefix="icons_white">
-    <file>icons_White/full_screen_2.png</file>
-    <file>icons_White/fullscreen-12-24.png</file>
+  <qresource prefix="icons_White">
     <file>icons_White/cil-3d.png</file>
     <file>icons_White/cil-4k.png</file>
     <file>icons_White/cil-account-logout.png</file>
@@ -251,6 +249,8 @@
     <file>icons_White/cil-x-circle.png</file>
     <file>icons_White/cil-zoom-in.png</file>
     <file>icons_White/cil-zoom-out.png</file>
+    <file>icons_White/full_screen_2.png</file>
+    <file>icons_White/fullscreen-12-24.png</file>
     <file>icons_White/icon_close.png</file>
     <file>icons_White/icon_maximize.png</file>
     <file>icons_White/icon_menu.png</file>
