@@ -81,7 +81,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             return True
         except Exception as e:
             print("Internet is not connected\n", e)
-            self.short_msg_notification("Internet is not connected...")
+            self.short_msg_notification("No internet connection...")
             return False
 
     """
@@ -95,13 +95,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         if not len(url):
             url = "https://www.youtube.com/"
         self.set_main_home_page()
-        try:
-            print("Youtube is searching...")
-        except Exception as e:
-            print("URL is not valid...\n", e)
-            self.short_msg_notification("URL is not valid...")
-            self.query_video_search()
-            return
         self.webview.setUrl(QUrl(url))
 
     """
@@ -163,9 +156,9 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         file_size = stream.filesize
         bytes_downloaded = file_size - bytes_remaining
         print(chunk)
-        self.short_msg_notification(f"{bytes_downloaded}/{file_size} Downloading...")
+        self.short_msg_notification(f"{bytes_downloaded/1024}/{file_size/1024} Downloading...")
         if bytes_downloaded == file_size:
-            self.short_msg_notification(f"{bytes_downloaded}/{file_size} Downloaded")
+            self.short_msg_notification(f"{bytes_downloaded/1024}/{file_size/1024} Downloaded")
 
     """
     Downloading youtube video with selected video resolution.
