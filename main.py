@@ -174,27 +174,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.yt.streams.filter(progressive=True, res=quality).first().download()
         self.short_msg_notification("Download done...")
 
-    """"
-    Youtube video information update in video information section
-    """
-
-    def video_info_update(self):
-        if self.yt.title != "":
-            self.video_title_field.setText(self.yt.title)
-            print("Video title " + self.yt.title + "...")
-        if self.yt.description != "":
-            self.video_description_field.setText(self.yt.description)
-            print("Video description " + self.yt.description[:40] + "...")
-        video_len = self.yt.length
-        hours = int(video_len / (60 * 60))
-        minutes = int((video_len - hours * 3600) / 60)
-        seconds = video_len - hours * 3600 - minutes * 60
-        self.video_length_field.setText(str(hours) + ":" + str(minutes) + ":" + str(seconds))
-        print("Video length " + str(self.yt.length) + "...")
-        if self.yt.author != "":
-            self.video_author_field.setText(self.yt.author)
-            print("Video author " + self.yt.author + "...")
-
     """
     Show/hide left navigation bar.
     """
@@ -301,7 +280,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         elif sys.platform == "darwin":  # for macOS
             self.media_player.set_nsobject(int(self.video_player_frame.winId()))
         self.play_pause()
-        self.show_local_video_information()
 
     """
     Open folder for displaying videos in navigation section.
